@@ -435,7 +435,7 @@
     // Si este dispositivo ya desbloqueó antes, no se vuelve a pedir la contraseña
     (function() {
         const alwaysAsk = localStorage.getItem('finanzas_vault_always_ask') === 'true';
-        if (!alwaysAsk && localStorage.getItem('finanzas_pro_unlocked') === 'true') {
+        if (!alwaysAsk && localStorage.getItem('finanzas_mama_unlocked') === 'true') {
             document.getElementById('vault-overlay').style.display = 'none';
             window.__pendingUnlock = true;
         }
@@ -445,7 +445,7 @@
         const input = document.getElementById('vault-pass');
         const errorEl = document.getElementById('vault-error');
         if (input.value === 'chia19') {
-            localStorage.setItem('finanzas_pro_unlocked', 'true');
+            localStorage.setItem('finanzas_mama_unlocked', 'true');
             document.getElementById('vault-overlay').style.display = 'none';
             window.__pendingUnlock = true;
             if (window.__cloudSync) window.__cloudSync.connect();
@@ -1880,7 +1880,7 @@
 };
     // --- FIN DATOS ---
 
-    let appState = JSON.parse(localStorage.getItem('finanzas_pro_v10')) || JSON.parse(localStorage.getItem('finanzas_pro_v9')) || restoredData;
+    let appState = JSON.parse(localStorage.getItem('finanzas_mama_v1')) || restoredData;
     let selectedTipo = "Gasto"; 
 
     function getCategoriaAhorroId() {
@@ -1921,7 +1921,7 @@
     }
 
     function syncData() {
-        localStorage.setItem('finanzas_pro_v10', JSON.stringify(appState));
+        localStorage.setItem('finanzas_mama_v1', JSON.stringify(appState));
         if (window.__cloudSync) window.__cloudSync.push(appState);
         renderAll();
     }
@@ -1945,7 +1945,7 @@
         appState.transacciones = firebaseToArray(appState.transacciones);
         appState.transacciones.forEach(t => { if (!Array.isArray(t.tagIds)) t.tagIds = firebaseToArray(t.tagIds); });
         appState.metas.forEach(m => { if (!Array.isArray(m.aportes)) m.aportes = firebaseToArray(m.aportes); });
-        localStorage.setItem('finanzas_pro_v10', JSON.stringify(appState));
+        localStorage.setItem('finanzas_mama_v1', JSON.stringify(appState));
         renderAll();
     };
 
